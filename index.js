@@ -10,15 +10,18 @@ const dbUrl='mongodb+srv://user:user@githubissue.iofo7.mongodb.net/githubissue?r
 mongoose.connect(dbUrl,{useUnifiedTopology: true,useNewUrlParser: true})
 .then((result)=>{
     console.log("connected to db")
+    app.listen(port, () => {
+        console.log(`Example app listening at http://localhost:${port}`)
+      })
 })
 .catch((err)=>{
    console.log(err)
 })
 
 ///listning to port
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-  })
+// app.listen(port, () => {
+//     console.log(`Example app listening at http://localhost:${port}`)
+//   })
 
   //
 
