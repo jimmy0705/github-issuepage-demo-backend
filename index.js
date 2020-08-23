@@ -26,12 +26,56 @@ mongoose.connect(dbUrl,{useUnifiedTopology: true,useNewUrlParser: true})
 app.use(moragn('tiny'))
 
 //routes goes here
+
+app.get('/',(req,res)=>{
+   // res.send("posted")
+    issue.find()
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      console.log(err);
+      //res.send("not posted")
+    });
+
+    
+})
+
+app.get('/api/issues/:id',(req,res)=>{
+    issue.findById(req.params.id)
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+})
+
+
 app.get('/api/issues', (req, res) => {
-  res.send('Hello World!')
+ // res.send('Hello World!')
+//   const Issue = new issue({
+//     title: 'Amit issue',
+//     status: true,
+//     createdBy:"Amit",
+//     body: 'Bhai mere deemag kaam nahin kar raha hai'
+
+//   })
+
+//   Issue.save()
+//     .then(result => {
+//       res.send(result);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       //res.send("not posted")
+//     });
 })
 
 app.post('/api/issues',(req,res)=>{
     res.send("posted")
+
+    
 })
 
 app.patch('/api/issues/:id',(req,res)=>{
