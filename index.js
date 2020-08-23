@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const moragn = require('morgan')
+const parser = require('body-parser')
+const cors = require('cors')
 const mongoose = require('mongoose')
 const issue = require('./models/issues');
 const port = 9000
@@ -27,19 +29,7 @@ app.use(moragn('tiny'))
 
 //routes goes here
 
-app.get('/',(req,res)=>{
-   // res.send("posted")
-    issue.find()
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      console.log(err);
-      //res.send("not posted")
-    });
 
-    
-})
 
 app.get('/api/issues/:id',(req,res)=>{
     issue.findById(req.params.id)
@@ -53,23 +43,16 @@ app.get('/api/issues/:id',(req,res)=>{
 
 
 app.get('/api/issues', (req, res) => {
- // res.send('Hello World!')
-//   const Issue = new issue({
-//     title: 'Amit issue',
-//     status: true,
-//     createdBy:"Amit",
-//     body: 'Bhai mere deemag kaam nahin kar raha hai'
 
-//   })
+    issue.find()
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      console.log(err);
+      //res.send("not posted")
+    });
 
-//   Issue.save()
-//     .then(result => {
-//       res.send(result);
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       //res.send("not posted")
-//     });
 })
 
 app.post('/api/issues',(req,res)=>{
@@ -83,7 +66,15 @@ app.patch('/api/issues/:id',(req,res)=>{
 })
 
 app.delete('/api/issues/:id',(req,res)=>{
-    res.send("deleted")
+    const id = req.params.id;
+  
+  issue.findByIdAndDelete(id)
+    .then(result => {
+      res.redirect('/api/issues');
+    })
+    .catch(err => {
+      console.log(err);
+    });
 })
 
 
