@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const moragn = require('morgan')
 const mongoose = require('mongoose')
+const issue = require('./models/issues');
 const port = 9000
 
 //connecting to mongodb
@@ -18,12 +19,8 @@ mongoose.connect(dbUrl,{useUnifiedTopology: true,useNewUrlParser: true})
    console.log(err)
 })
 
-///listning to port
-// app.listen(port, () => {
-//     console.log(`Example app listening at http://localhost:${port}`)
-//   })
 
-  //
+
 
   //middlewires gooes here
 app.use(moragn('tiny'))
