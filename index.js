@@ -1,14 +1,31 @@
 const express = require('express')
 const app = express()
 const moragn = require('morgan')
+const mongoose = require('mongoose')
 const port = 9000
 
+//connecting to mongodb
+const dbUrl='mongodb+srv://user:user@githubissue.iofo7.mongodb.net/githubissue?retryWrites=true&w=majority';
+
+mongoose.connect(dbUrl,{useUnifiedTopology: true,useNewUrlParser: true})
+.then((result)=>{
+    console.log("connected to db")
+})
+.catch((err)=>{
+   console.log(err)
+})
+
+///listning to port
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
   })
 
+  //
+
+  //middlewires gooes here
 app.use(moragn('tiny'))
 
+//routes goes here
 app.get('/api/issues', (req, res) => {
   res.send('Hello World!')
 })
